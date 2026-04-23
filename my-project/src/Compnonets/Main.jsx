@@ -94,6 +94,13 @@ const Main = () => {
     growth: "+23% engagement potential"
   };
 
+  const fakeAnalytics = {
+    views: "12.4K",
+    engagement: "8.7%",
+    watchTime: "3.2 hrs",
+    growth: "+18%"
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-black text-white flex flex-col">
       <Navbar />
@@ -219,6 +226,20 @@ const Main = () => {
                   Demo Preview
                 </span>
               </h2>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+
+                {Object.entries(fakeAnalytics).map(([key, value], i) => (
+                  <div
+                    key={i}
+                    className="bg-white/5 border border-white/10 rounded-xl p-4 text-center shadow-lg hover:scale-105 transition"
+                  >
+                    <p className="text-gray-400 text-sm capitalize">{key}</p>
+                    <p className="text-2xl font-bold text-white mt-1">{value}</p>
+                  </div>
+                ))}
+
+              </div>
 
               {/* Trend Score */}
               <div className="mb-4">
