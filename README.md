@@ -15,7 +15,7 @@ This project is dedicated to enhancing Search Engine Optimization (SEO) strategi
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/parjan935/SEO.git
+   git clone https://github.com/Venkat-737/SEO-Enhancer
    ```
 2. **Navigate to the project directory**:
    ```bash
@@ -81,13 +81,5 @@ We welcome contributions! Please follow these steps:
 6. **Create a Pull Request**.
 
 
-## Contact
 
-For any inquiries or feedback, please contact
-[Parjan](https://github.com/parjan935),
-[Ambhikesh](https://github.com/Ambhikesh9) 
-[Shireesh](https://github.com/Shireeshsk),
-[Siddharth](https://github.com/Sidhudupati),
-[Sanjay](https://github.com/sannjaay),
-[Uday](https://github.com/Uday8897).
 
