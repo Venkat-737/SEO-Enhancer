@@ -61,7 +61,7 @@ def extract_transcript_details(video_file_path):
     try:
         model = _get_whisper_model()
         command = [
-            "ffmpeg",
+            r"C:\ffmpeg-8.1-full_build\bin\ffmpeg.exe",
             "-nostdin",
             "-i",
             video_file_path,
