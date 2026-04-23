@@ -1,0 +1,8 @@
+flask
+python-dotenv
+openai-whisper
+google-generativeai
+soundfile
+Flask-Cors
+requests
+youtube-transcript-api
