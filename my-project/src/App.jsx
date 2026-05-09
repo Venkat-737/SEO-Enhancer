@@ -17,6 +17,8 @@ import Activity from "./Compnonets/AdminComponents/Activity";
 import { useState, useEffect } from "react";
 import Navbar from "./Compnonets/Navbar";
 import { resetInactivityTimer, handleUserActivity } from './utils/TokenUtils'
+import VideoIQPage from './videoiq/pages/VideoIQPage'
+import VideoIQDemo from './videoiq/pages/VideoIQDemo'
 
 
 // const plainPasswords = [
@@ -60,6 +62,8 @@ export default function App() {
           <Route path="/main" element={<Main />}></Route>
           <Route path="/admin/dashboard" element={<AdminDashBoard />}></Route>
           <Route path="/admin/activity" element={<Activity />}></Route>
+          <Route path="/videoiq" element={<VideoIQPage />}></Route>
+          <Route path="/videoiq/demo" element={<VideoIQDemo />}></Route>
         </Routes>
       </BrowserRouter>
     </>
