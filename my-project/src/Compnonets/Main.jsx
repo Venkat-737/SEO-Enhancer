@@ -31,7 +31,7 @@ const Main = () => {
     }
   };
 
-  const handleReset=()=>{
+  const handleReset = () => {
     setData(null)
     setStatus("")
     setVideoFile(null)
@@ -88,109 +88,197 @@ const Main = () => {
     }
   }, []);
 
-  return (
-    <div className="flex flex-col bg-navy2 min-h-screen h-fit">
-      <Navbar />
-      <div className="mt-32 text-center text-white flex-grow pb-8">
-        <input
-          className="m-5 text-white w-fit"
-          type="file"
-          accept="video/mp4"
-          onChange={handleFileChange}
-          disabled={isDisable}
-          name="mp4"
-          id="video"
-          placeholder=""
-        />
-        {videoFile && (
-          <div className="text-white space-y-5">
-            <p>Selected File: {videoFile.name}</p>
-            {videoFile && (
-              <p className="text-lime-500">
-                Video Size: {(videoFile.size / (1024 * 1024)).toFixed(2)} MB
-              </p>
-            )}
-            <button
-              disabled={isDisable}
-              className={`bg-red-500 p-2 rounded ${
-                isDisable ? "bg-blue-100 cursor-not-allowed" : ""
-              }`}
-              onClick={handleSubmit}
-            >
-              Upload Video
-            </button>
-          </div>
-        )}
-        {process ? (
-          <div className="flex justify-center space-x-4">
-            <Spinner />
-            <h1 className=" text-white text-3xl m-5 ml-3 mr-0 space-x-0">
-              Processing video
-            </h1>
-          </div>
-        ) : (
-          " "
-        )}
-        {!process && status != "" ? (
-          <div>
-            <h1 className="text-white m-5 text-2xl">
-              {status}
-            </h1>
-          </div>
-        ) : (
-          ""
-        )}
+  const fakeTrendData = {
+    score: 87,
+    trends: ["AI Tools", "Short-form Content", "Productivity Hacks", "Tech Reviews"],
+    growth: "+23% engagement potential"
+  };
 
+  const fakeAnalytics = {
+    views: "12.4K",
+    engagement: "8.7%",
+    watchTime: "3.2 hrs",
+    growth: "+18%"
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-black text-white flex flex-col">
+      <Navbar />
+
+      <div className="flex-grow flex flex-col items-center justify-center px-4 mt-20">
+
+        {/* HERO CARD */}
+        <div className="backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl shadow-2xl p-8 w-full max-w-2xl text-center">
+
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+            AI Video Processor
+          </h1>
+          <p className="text-gray-400 mb-6">
+            Upload your video and generate summaries, titles & hashtags instantly
+          </p>
+
+          {/* FILE INPUT */}
+          <input
+            className="mb-4 w-full p-3 rounded-lg bg-white/10 border border-white/20 cursor-pointer"
+            type="file"
+            accept="video/mp4"
+            onChange={handleFileChange}
+            disabled={isDisable}
+          />
+
+          {/* FILE DETAILS */}
+          {videoFile && (
+            <div className="mb-4 text-sm text-gray-300">
+              <p>📁 {videoFile.name}</p>
+              <p className="text-green-400">
+                {videoSize} MB
+              </p>
+            </div>
+          )}
+
+          {/* BUTTON */}
+          <button
+            disabled={isDisable}
+            onClick={handleSubmit}
+            className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 
+            ${isDisable
+                ? "bg-gray-500 cursor-not-allowed"
+                : "bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105 hover:shadow-lg"
+              }`}
+          >
+            🚀 Process Video
+          </button>
+
+          {/* STATUS */}
+          {process && (
+            <div className="flex justify-center items-center gap-3 mt-6">
+              <Spinner />
+              <p className="text-lg">Processing...</p>
+            </div>
+          )}
+
+          {!process && status && (
+            <p className="mt-4 text-lg text-green-400">{status}</p>
+          )}
+        </div>
+
+        {/* RESULTS */}
         {data && !process && (
-          <div className="mt-3 text-white flex flex-col space-y-10 justify-center ">
-            <div className="flex justify-center">
-              <div className="bg-gray-400 rounded-lg text-black shadow-[0px_0px_30px_rgba(0,0,0,0.5)] w-3/4  p-5  ">
-                <h1 className=" flex justify-center text-3xl mb-4 font-medium text-center">
-                  Summary : <Copy text={data.Summary} />{" "}
-                </h1>
-                <p>{data.Summary}</p>
-              </div>
+          <div className="mt-10 w-full max-w-5xl space-y-6">
+
+            {/* SUMMARY */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg">
+              <h2 className="text-2xl font-semibold mb-3 flex justify-between">
+                Summary <Copy text={data.Summary} />
+              </h2>
+              <p className="text-gray-300">{data.Summary}</p>
             </div>
-            <div className="flex justify-center">
-              <div
-                className="bg-gray-400 rounded-lg text-black shadow-[0px_0px_30px_rgba(0,0,0,0.5)] w-fit p-5 px-10 lg:px-32 
-              text-left "
-              >
-                <h1 className="flex justify-center mb-4 text-3xl font-medium text-center">
-                  Titles : <Copy text={data.Titles} />
-                </h1>
-                <p>
-                  {data.Titles.map((key, index) => (
-                    <li key={index}>{key}</li>
-                  ))}
-                </p>
-              </div>
+
+            {/* TITLES */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg">
+              <h2 className="text-2xl font-semibold mb-3 flex justify-between">
+                Titles <Copy text={data.Titles} />
+              </h2>
+              <ul className="list-disc list-inside text-gray-300 space-y-1">
+                {data.Titles.map((t, i) => (
+                  <li key={i}>{t}</li>
+                ))}
+              </ul>
             </div>
-            <div className="flex flex-col space-y-10 space-x-0 md:flex-row md:space-x-10 md:space-y-0 text-white justify-center mx-auto">
-              <div className="bg-gray-400 rounded-lg text-black shadow-[0px_0px_30px_rgba(0,0,0,0.5)] w-fit text-left p-10 pt-0">
-                <h1 className="flex justify-center text-3xl font-medium text-center py-5 pb-4">
-                  Keywords : <Copy text={data.Keywords} />
-                </h1>
-                <p>
-                  {data.Keywords.map((key, index) => (
-                    <li key={index}>{key}</li>
+
+            {/* KEYWORDS + HASHTAGS */}
+            <div className="grid md:grid-cols-2 gap-6">
+
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg">
+                <h2 className="text-xl font-semibold mb-3 flex justify-between">
+                  Keywords <Copy text={data.Keywords} />
+                </h2>
+                <ul className="text-gray-300 space-y-1">
+                  {data.Keywords.map((k, i) => (
+                    <li key={i}>• {k}</li>
                   ))}
+                </ul>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 shadow-lg">
+                <h2 className="text-xl font-semibold mb-3 flex justify-between">
+                  Hashtags <Copy text={data.Hashtags} />
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {data.Hashtags.map((tag, i) => (
+                    <span
+                      key={i}
+                      className="bg-purple-600/30 px-3 py-1 rounded-full text-sm"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+            <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 border border-white/10 rounded-xl p-6 shadow-xl">
+
+              <h2 className="text-2xl font-semibold mb-4 flex justify-between items-center">
+                🚀 Trend Mapping
+                <span className="text-xs bg-yellow-500/20 text-yellow-300 px-2 py-1 rounded">
+                  Demo Preview
+                </span>
+              </h2>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+
+                {Object.entries(fakeAnalytics).map(([key, value], i) => (
+                  <div
+                    key={i}
+                    className="bg-white/5 border border-white/10 rounded-xl p-4 text-center shadow-lg hover:scale-105 transition"
+                  >
+                    <p className="text-gray-400 text-sm capitalize">{key}</p>
+                    <p className="text-2xl font-bold text-white mt-1">{value}</p>
+                  </div>
+                ))}
+
+              </div>
+
+              {/* Trend Score */}
+              <div className="mb-4">
+                <p className="text-gray-400">Trend Score</p>
+                <div className="w-full bg-white/10 rounded-full h-3 mt-1">
+                  <div
+                    className="bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full"
+                    style={{ width: `${fakeTrendData.score}%` }}
+                  ></div>
+                </div>
+                <p className="text-green-400 mt-1 font-semibold">
+                  {fakeTrendData.score}/100
                 </p>
               </div>
-              <div className="bg-gray-400 rounded-lg text-black shadow-[0px_0px_30px_rgba(0,0,0,0.5)] w-fit text-left p-10 pt-0">
-                <h1 className="flex justify-center text-3xl font-medium text-center py-5 pb-4">
-                  Hashtags : <Copy text={data.Hashtags} />
-                </h1>
-                <p>
-                  {data.Hashtags.map((tag, index) => (
-                    <li key={index}>{tag}</li>
+
+              {/* Growth */}
+              <p className="text-sm text-blue-400 mb-4">
+                📈 {fakeTrendData.growth}
+              </p>
+
+              {/* Trending Topics */}
+              <div>
+                <p className="text-gray-400 mb-2">Trending Topics</p>
+                <div className="flex flex-wrap gap-2">
+                  {fakeTrendData.trends.map((t, i) => (
+                    <span
+                      key={i}
+                      className="bg-purple-500/30 px-3 py-1 rounded-full text-sm"
+                    >
+                      {t}
+                    </span>
                   ))}
-                </p>
+                </div>
               </div>
             </div>
           </div>
         )}
       </div>
+
       <Footer />
     </div>
   );

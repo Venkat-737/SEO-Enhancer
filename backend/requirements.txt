@@ -1,0 +1,26 @@
+flask
+flask-cors
+werkzeug
+
+# Video / audio
+moviepy
+openai-whisper
+opencv-python
+Pillow
+
+# NLP / SEO
+keybert
+transformers
+torch
+spacy
+nltk
+
+# Gemini (free tier)
+google-generativeai
+
+python-dotenv
+
+# FFmpeg must be installed separately:
+#   Ubuntu/Debian : sudo apt install ffmpeg
+#   macOS         : brew install ffmpeg
+#   Windows       : https://ffmpeg.org/download.html
